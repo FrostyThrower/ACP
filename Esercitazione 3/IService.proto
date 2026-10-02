@@ -1,0 +1,27 @@
+// Questo è un tipo Protocol Buffer
+
+syntax = "proto3";
+
+package order_service;
+
+service Order_Service{
+
+    rpc deposita(Item) returns (StringMessage);
+    rpc preleva(Empty) returns (Item);
+    rpc svuota(Empty) returns (stream Item);
+}
+
+message Item{
+
+    int64 id_articolo = 1;
+    string prodotto = 2;
+}
+
+message StringMessage{
+
+    string value = 1;
+}
+
+message Empty{
+
+}

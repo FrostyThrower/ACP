@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package esercitazione.gRPC;
+
+message Empty{}
+
+message Ack{
+    string result = 1;
+}
+
+message Package {
+    int32 id = 1;
+    string priority = 2;
+    string destination = 3;
+}
+
+message CollectRequest {
+    string priority = 1;
+    string courier_id = 2;
+}
+
+message Status {
+    int32 standard_size = 1;
+    int32 express_size = 2;
+    int32 total_sorted = 3;
+}
+
+message DestinationRequest {
+    string destination = 1;
+}
+
+service Sorter{
+    
+    rpc deposit(Package) returns (Ack);
+    rpc collect(CollectRequest) returns (Package);
+    rpc watchStatus(Empty) returns (stream Status);
+    rpc listPackage(DestinationRequest) returns (stream Package);
+
+}
