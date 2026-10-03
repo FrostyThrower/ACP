@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package orderManager;
+
+message Order{
+    string id = 1;
+    string items = 2; // sequenza di items diversificata da "-"
+    string descrizione = 3;
+    float prezzo = 4;
+    string destinazione = 5;
+}
+
+message CombinedShipment{
+    string id = 1;
+    string stato = 2;
+    string ordini = 3;
+}
+
+message StringMassage{
+    string messaggio = 1;
+}
+
+service OrderManager{
+    rpc addOrder(Order) returns (StringMassage);
+    rpc getOrder(StringMassage) returns (Order);
+    rpc searchOrders(StringMassage) returns (stream Order);
+    rpc processOrders(stream Order) returns (stream CombinedShipment);
+    rpc cancelShipment(StringMassage) returns (StringMassage);
+}
