@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package esercitazione_5_gRPC_Flask_MongoDb;
+
+message Empty{}
+
+message Sensor{
+    string sensor_id = 1;
+    string data_type = 2;
+}
+
+message MeanRequest{
+    string sensor_id = 1;
+    string data_type = 2;
+}
+
+message StringMessage{
+    string message = 1;
+}
+
+service Statistics{
+    rpc getSensors(Empty) returns (stream Sensor);
+    rpc getMean(MeanRequest) returns (StringMessage);
+}

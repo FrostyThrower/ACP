@@ -114,7 +114,7 @@ class OrderManager(order_manager_pb2_grpc.OrderManagerServicer):
             id_to_insert = 0
 
             with self.lock_id_shipments:
-                id_to_insert = self.next_id_shipments
+                id_to_insert = self.nextu_id_shipments
                 self.next_id_shipments = self.next_id_shipments + 1
 
             self.shipments.insert_one({
@@ -139,7 +139,7 @@ class OrderManager(order_manager_pb2_grpc.OrderManagerServicer):
 
         print(list(self.shipments.find()))
 
-        return order_manager_pb2.StringMassage(messaggio="Deleted")        
+        return order_manager_pb2.StringMassage(messaggio="Deleted")      
         
 
 if __name__ == "__main__":
