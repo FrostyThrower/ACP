@@ -1,7 +1,8 @@
 import statistics_pb2, statistics_pb2_grpc
 from database_controller import Database_controller
 import json
-import grpc, concurrent
+import grpc
+from concurrent import futures
 
 class StatisticsService(statistics_pb2_grpc.StatisticsServicer):
 
