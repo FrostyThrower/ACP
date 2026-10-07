@@ -8,9 +8,11 @@ public class Client {
         Thread[] threads = new Thread[5];
         
         for (Thread thread : threads) {
-            thread = new WorkerClient(dispatcher);
+            thread = new WorkerClient();
             thread.start();
         }
+
+
     }
 
 }

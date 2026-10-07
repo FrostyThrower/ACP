@@ -3,17 +3,23 @@ package Java.Esercitazione_ProxySkeleton;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 
 
 public class DispatcherProxy implements IDispatcher{
 
-    DatagramSocket socket;
+    private DatagramSocket socket;
     private final int SERVER_PORT = 8080;
+    private InetAddress serverAddress;
 
     public DispatcherProxy(){
         try {
+            this.serverAddress = InetAddress.getByName("localhost");
             this.socket = new DatagramSocket();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
         } catch (SocketException e) {
             e.printStackTrace();
         }
@@ -25,7 +31,7 @@ public class DispatcherProxy implements IDispatcher{
 
             String message = new String("sendCmd-"+cmd);
             DatagramPacket request = new DatagramPacket(message.getBytes(), message.getBytes().length, 
-                                                        this.socket.getLocalAddress(), this.SERVER_PORT);
+                                                        this.serverAddress, this.SERVER_PORT);
 
             this.socket.send(request);
 
@@ -50,7 +56,7 @@ public class DispatcherProxy implements IDispatcher{
 
             String messsage = new String("getCmd");
             DatagramPacket request = new DatagramPacket(messsage.getBytes(), messsage.getBytes().length,
-                                                        this.socket.getLocalAddress(), this.SERVER_PORT);
+                                                        this.serverAddress, this.SERVER_PORT);
             
             this.socket.send(request);
 

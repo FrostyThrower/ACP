@@ -8,6 +8,7 @@ public class DispatcherImpl implements IDispatcher {
     private int[] coda;
     private int head;
     private int tail;
+    private int count;
     private ReentrantLock lock;
     private Condition cv_prod;
     private Condition cv_cons; 
@@ -18,6 +19,7 @@ public class DispatcherImpl implements IDispatcher {
         this.coda = new int[lenght];
         this.head = 0;
         this.tail = 0;
+        this.count = 0;
 
         this.lock = new ReentrantLock();
         this.cv_prod = this.lock.newCondition();
@@ -29,7 +31,7 @@ public class DispatcherImpl implements IDispatcher {
         this.lock.lock();
         try{
 
-            while( (this.head - this.tail) == this.coda.length ){
+            while( this.count == this.coda.length ){
                 try {
                     this.cv_prod.await();  
                 } catch (InterruptedException e) {
@@ -39,6 +41,7 @@ public class DispatcherImpl implements IDispatcher {
 
             this.coda[this.head] = cmd;
             this.head++;
+            this.count++;
             if (this.head == this.coda.length) this.head = 0;
             
             this.cv_cons.signal();
@@ -55,7 +58,7 @@ public class DispatcherImpl implements IDispatcher {
         this.lock.lock();
         try{
 
-            while ((this.head - this.tail) == 0) {
+            while (this.count == 0) {
                 try{
                     this.cv_cons.await();
                 } catch (InterruptedException e){
@@ -65,6 +68,7 @@ public class DispatcherImpl implements IDispatcher {
 
             output = this.coda[this.tail];
             this.tail++;
+            this.count--;
             if (this.tail == this.coda.length) this.tail = 0;
             
             this.cv_prod.signal();
