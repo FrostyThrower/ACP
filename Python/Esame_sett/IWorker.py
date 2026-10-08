@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 class IWorker(ABC):
 
     @abstractmethod
-    def runTask(self, prompt: string, modello: string) -> bool:
+    def runTask(self, prompt, modello) -> bool:
         pass
 
     @abstractmethod

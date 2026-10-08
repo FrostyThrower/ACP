@@ -7,7 +7,7 @@ class Worker(IWorker):
     def __init__(self):
         pass
     
-    def runTask(self, prompt: string, modello: string) -> bool:
+    def runTask(self, prompt, modello) -> bool:
         
         # Scrivo sul file
         with open("generation.txt", "w") as file:
@@ -21,7 +21,7 @@ class Worker(IWorker):
 
     def getConfidence(self) -> bool:
         
-        confidence = bool(uniform(0, 1))
+        confidence = uniform(0, 1)
         if confidence > 0.7:
             return True
         else:

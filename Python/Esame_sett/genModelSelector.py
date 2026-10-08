@@ -44,6 +44,7 @@ class GenModelSelector (genModelSelector_pb2_grpc.GenModelSelectorServicer):
             
             if result is False:
                 yield genModelSelector_pb2.Result(confidenceCheck=result)
+                continue
 
             result = self.worker.getConfidence()
 
