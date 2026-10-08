@@ -10,7 +10,7 @@ class Worker(IWorker):
     def runTask(self, prompt, modello) -> bool:
         
         # Scrivo sul file
-        with open("generation.txt", "w") as file:
+        with open("generation.txt", "a") as file:
 
             file.write("\n")
             file.write(prompt + " - " + modello + "\n")
