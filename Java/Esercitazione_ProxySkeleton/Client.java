@@ -4,12 +4,19 @@ public class Client {
 
     public static void main(String[] args) {
         
-        IDispatcher dispatcher = new DispatcherProxy();
         Thread[] threads = new Thread[5];
         
+        for (int i = 0; i < threads.length; i++) {
+            threads[i] = new WorkerClient();
+            threads[i].start();           
+        }
+
         for (Thread thread : threads) {
-            thread = new WorkerClient();
-            thread.start();
+            try {
+                thread.join();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
 

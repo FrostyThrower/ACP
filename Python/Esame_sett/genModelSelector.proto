@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package esame_sett;
+
+message Request{
+    string taskId = 1;
+    string taskType = 2;
+    repeated string prompts = 3;
+    int32 numPrompt = 4;
+}
+
+message Result{
+    bool confidenceCheck = 1;    
+}
+
+service GenModelSelector {
+    rpc submitGenTask(Request) returns (stream Result);
+}
