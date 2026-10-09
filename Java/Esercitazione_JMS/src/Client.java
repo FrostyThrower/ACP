@@ -52,7 +52,7 @@ public class Client {
 
             // Richieste di tipo deposito
             for (int i = 0; i < NUM_DEPOSITO; i++) {
-                messageDeposito.setString("operazione", "deposito");
+                messageDeposito.setString("operazione", "deposita");
                 messageDeposito.setInt("valore", ran.nextInt(100)+1);
                 sender_magazzino.send(messageDeposito);
                 System.out.println("[Client] Inviata richiesta " + messageDeposito.getInt("valore"));

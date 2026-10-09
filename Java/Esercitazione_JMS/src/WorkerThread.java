@@ -1,3 +1,5 @@
+import java.util.Queue;
+
 import javax.jms.*;
 
 public class WorkerThread extends Thread{
@@ -22,7 +24,7 @@ public class WorkerThread extends Thread{
         try {
             String operazione = (String) this.request.getString("operazione");
 
-            if (operazione.compareTo("deposito") == 0){
+            if (operazione.compareTo("deposita") == 0){
                 System.out.println("[Magazzino] Richiesta di deposito");
 
                 int id_articolo = (int) this.request.getInt("valore");
@@ -32,22 +34,23 @@ public class WorkerThread extends Thread{
             } else if (operazione.compareTo("preleva") == 0){
 
                 try{
-                    this.session = this.conn.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
-                    this.sender = this.session.createSender(this.queue);
-
                     System.out.println("[Magazzino] Richiesta di prelevo");
 
                     int id_articolo = this.coda.preleva();
+
+                    this.session = this.conn.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
+                    this.sender = this.session.createSender(this.queue);
+                    
                     MapMessage reply = this.session.createMapMessage();
 
                     reply.setInt("valore", id_articolo);
+
+                    this.sender.close();
+                    this.session.close();
                 this.sender.send(reply);
 
                 } catch (Exception e){
                     e.printStackTrace();
-                } finally {
-                    this.sender.close();
-                    this.session.close();
                 }
                 
 

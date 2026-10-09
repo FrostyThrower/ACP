@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+package sensor;
+
+message Reading{
+    string sensor_id = 1;
+    string type = 2;
+    double value = 3;
+    int32 timestamp = 4;
+}
+
+message Ack {
+    bool accepted = 1;
+    string message = 2;
+}
+
+message SensorQuery { 
+    string sensor_id = 1; 
+    int32 max_results = 2; 
+}
+
+message Stats { 
+    string sensor_id = 1;
+    int32 count = 2;
+    double average = 3;
+    double max = 4; 
+}
+
+service SensorHub {
+    // 3.1 — unaria: registra una singola lettura e restituisce Ack
+    rpc RegisterReading(Reading) returns (Ack);
+    // 3.2 — server streaming: COMPLETA LA FIRMA.
+    rpc StreamReadings(SensorQuery) returns (stream Reading);
+    // 3.3 — unaria, ma computazionalmente lenta: calcola le statistiche
+    // di un sensore. Simula il costo con un Thread.sleep(2000).
+    rpc ComputeStats(SensorQuery) returns (Stats);
+}
