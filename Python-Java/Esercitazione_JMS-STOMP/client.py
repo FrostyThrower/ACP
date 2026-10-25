@@ -30,7 +30,7 @@ if __name__ == "__main__":
         print(f"[Client] Send deposited request: id = {id_articolo}, correlation-id = {i} ")
 
     # Request preleva
-    for i in range (int(NUM_REQ/2)+1, NUM_REQ):
+    for i in range (int(NUM_REQ/2), NUM_REQ):
         msg = "preleva"
         conn.send(destination='/queue/request', body=msg, headers={"correlation-id" : f"{i}", "reply-to" : "/queue/reply"})
         print(f"[Client] Send deposited request: correlation-id = {i} ")

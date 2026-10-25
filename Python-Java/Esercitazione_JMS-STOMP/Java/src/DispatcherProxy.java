@@ -28,7 +28,6 @@ public class DispatcherProxy implements IServer{
         String response = null;
         try {
             response = reader.readLine();
-            System.out.println(response);
             soc.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -60,7 +59,6 @@ public class DispatcherProxy implements IServer{
         try {
             String response = reader.readLine();
             id_return = Integer.parseInt(response);
-            System.out.println(response);
             
             soc.close();
         } catch (IOException e) {

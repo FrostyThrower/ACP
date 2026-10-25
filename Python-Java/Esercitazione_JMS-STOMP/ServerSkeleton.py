@@ -31,9 +31,9 @@ class ServerSkeleton(ABC):
         else:
             response = self.preleva()
 
-        print(response)
+        response = str(response) + "\n"
 
-        conn.send(str(response).encode('utf-8'))
+        conn.send(response.encode('utf-8'))
         conn.close()
         
 

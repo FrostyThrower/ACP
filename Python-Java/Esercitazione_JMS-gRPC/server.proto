@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package server;
+
+message Request{
+    int32 id_articolo = 1;
+}
+
+message Reply{
+    string response = 1;
+}
+
+message Empty{}
+
+service Server{
+    rpc Deposita(Request) returns (Reply);
+    rpc Preleva(Empty) returns (Reply);
+}

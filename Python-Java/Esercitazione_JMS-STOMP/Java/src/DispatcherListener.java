@@ -23,7 +23,6 @@ public class DispatcherListener implements MessageListener{
                 id_articolo = -1;
             }
 
-            System.out.println("ReplyTo: " + msg.getJMSReplyTo());
             Queue queue = (Queue) msg.getJMSReplyTo();  
             String correlation_id = msg.getJMSCorrelationID();
 
