@@ -43,7 +43,7 @@ public class StrutturaMem {
         lock.lock();
         try{
 
-            list_return = mem.get(sensor_id);
+            list_return = new ArrayList<>(mem.get(sensor_id));
 
         } finally {
             lock.unlock();

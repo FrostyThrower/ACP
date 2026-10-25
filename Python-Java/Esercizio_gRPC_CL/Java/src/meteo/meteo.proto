@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+package meteo;
+
+message CittaRequest{
+    string citta = 1;
+    int32 campioni = 2;
+}
+
+message RilevazioneReply{
+    string citta = 1;
+    double temperatura_c = 2;
+    int32 timestamp_unix = 3;
+}
+
+service StazioneMeteo{
+    rpc RilevaTemperatura(CittaRequest) returns (RilevazioneReply);
+    rpc Monitora(CittaRequest) returns (stream RilevazioneReply);
+}

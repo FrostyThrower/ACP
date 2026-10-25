@@ -88,10 +88,6 @@ class Server(SkeletonServer):
                 with open(self.path_smartphone, 'a') as file:
                     file.write("Prelievo" + str(self.queue_smartphone) + f"remove {id}" + "\n")
 
-            
-
-
-
             print(f"[Server] Prelevato {articolo}:{id}") 
 
         elif (articolo == 1): # laptop

@@ -39,6 +39,6 @@ if __name__ == "__main__":
     # lo iscrivo al topic corretto
     conn.subscribe("/topic/response", id=1, ack="auto")
 
-    time.sleep(30)
-
+    wait = input("Premi un tasto per chiudere il client...")
+    
     conn.disconnect()
