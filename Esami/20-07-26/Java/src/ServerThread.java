@@ -1,7 +1,5 @@
 import javax.jms.*;
 
-import org.apache.activemq.filter.FunctionCallExpression.invalidFunctionExpressionException;
-
 public class ServerThread extends Thread{
 
     private String type;
@@ -23,7 +21,7 @@ public class ServerThread extends Thread{
             TopicSession topicSess = topicConn.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
             TopicSubscriber subscriber = topicSess.createDurableSubscriber(topic, "sub-"+type);
 
-            subscriber.setMessageListener(new ServerThreadListener());
+            subscriber.setMessageListener(new ServerThreadListener(type));
             
             Thread.sleep(30000);
 
