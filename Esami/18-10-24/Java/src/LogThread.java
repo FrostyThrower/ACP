@@ -46,6 +46,7 @@ public class LogThread extends Thread{
                 
                 sender_error.close();
                 sess_error.close();
+                queueConn_error.close();
 
             } else {
                 
@@ -65,6 +66,7 @@ public class LogThread extends Thread{
 
                 sender_info.close();
                 sess_info.close();
+                queueConn_info.close();
 
             }
 
