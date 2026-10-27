@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package checker;
+
+message Temp{
+    int32 temperatura = 1;
+}
+
+message ReplyMedia{
+    float media = 1;
+}
+
+message StringMessage{
+    string messge = 1;
+}
+
+message Empty{}
+
+service Checker{
+    rpc stream_temp(stream Temp) returns (StringMessage);
+    rpc get_average(Empty) returns (ReplyMedia);
+}
