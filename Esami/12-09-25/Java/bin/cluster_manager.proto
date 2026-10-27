@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package clusterManager;
+
+option java_multiple_files = true;
+
+message Request{
+    int32 id = 1;
+    string name = 2;
+    string type = 3; 
+}
+
+message StringMessage{
+    string value = 1;
+}
+
+message Empty{}
+
+service ClusterManager{
+    rpc deploy(Request) returns (Empty);
+    rpc stop_all(StringMessage) returns (Empty);
+}
