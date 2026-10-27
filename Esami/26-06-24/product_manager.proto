@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package product_manager.proto3;
+
+message SerialNumber{
+    int32 int_value = 1;
+}
+
+message Empty{}
+
+message Response{
+    bool bool_value = 1;
+}
+
+service ProductManager{
+    rpc buy(Empty) returns (SerialNumber);
+    rpc sell(SerialNumber) returns (Response);
+}
