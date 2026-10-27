@@ -2,7 +2,7 @@ import checker_pb2, checker_pb2_grpc
 import grpc
 from random import randint
 
-NUM_RICHIESTA = 10
+NUM_RICHIESTA = 5
 NUM_VALORI_TEMP = 5
 
 def generate_temp_data():

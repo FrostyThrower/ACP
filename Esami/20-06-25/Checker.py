@@ -16,22 +16,18 @@ class Checker(checker_pb2_grpc.CheckerServicer):
 
         print("[Checker] Richiesta stream_temp...")
 
-        result = ""
+        result = "NORMAL"
 
         for request in request_iterator:
 
             data = int(request.temperatura)
             print("[Checker] Temp_data: " + str(data))
-            with self.lock:
-                self.queue.put(data)
+            self.queue.put(data)
 
             if data > self.soglia:
                 self.conn.send("/topic/alert", str(data))
                 result = "ALERT"
-
-            else:
-                result = "NORMAL"
-
+                
         return checker_pb2.StringMessage(messge=result)
 
     def get_average(self, request, context):

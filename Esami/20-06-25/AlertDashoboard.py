@@ -21,6 +21,8 @@ class AlertDashboardListener(stomp.ConnectionListener):
 
 if __name__ == "__main__":
 
+    with open("alert.txt", "a") as file:
+        file.write(f"\nNewStart:\n")
 
     conn = stomp.Connection([("localhost", 61613)])
     conn.connect(wait=True)
